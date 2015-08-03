@@ -1,4 +1,4 @@
-var camera, scene, renderer;
+var camera, scene, renderer, player;
 var geometry, material, mesh;
 var controls;
 
@@ -13,7 +13,8 @@ rays = [
     new THREE.Vector3(0, 0, -1),
     new THREE.Vector3(-1, 0, -1),
     new THREE.Vector3(-1, 0, 0),
-    new THREE.Vector3(-1, 0, 1)
+    new THREE.Vector3(-1, 0, 1),
+    new THREE.Vector3(0, -2, 0)
 ];
 
 var blocker = document.getElementById( 'blocker' );
@@ -117,7 +118,6 @@ var moveLeft = false;
 var moveRight = false;
 
 var prevTime = performance.now();
-var velocity = new THREE.Vector3();
 
 function init() {
 
@@ -137,6 +137,10 @@ function init() {
 
 	raycaster = new THREE.Raycaster( new THREE.Vector3(), new THREE.Vector3( 0, - 1, 0 ), 0, 10 );
 
+	player = new Player({
+		controls : controls,
+		caster : raycaster
+	});
 	// floor
 
 	geometry = new THREE.PlaneGeometry( 2000, 2000, 100, 100 );
