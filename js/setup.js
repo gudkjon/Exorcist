@@ -5,6 +5,16 @@ var controls;
 var objects = [];
 
 var raycaster;
+rays = [
+    new THREE.Vector3(0, 0, 1),
+    new THREE.Vector3(1, 0, 1),
+    new THREE.Vector3(1, 0, 0),
+    new THREE.Vector3(1, 0, -1),
+    new THREE.Vector3(0, 0, -1),
+    new THREE.Vector3(-1, 0, -1),
+    new THREE.Vector3(-1, 0, 0),
+    new THREE.Vector3(-1, 0, 1)
+];
 
 var blocker = document.getElementById( 'blocker' );
 var instructions = document.getElementById( 'instructions' );

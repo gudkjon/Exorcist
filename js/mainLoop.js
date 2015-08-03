@@ -20,6 +20,7 @@ function updatePlayer(delta) {
 
 		canJump = true;*/
 	}
+	collision();
 
 	controls.getObject().translateX( velocity.x * delta );
 	controls.getObject().translateY( velocity.y * delta );
@@ -59,3 +60,31 @@ function iterGame() {
 
 }
 iterGame();
+
+var collision = function () {
+    //'use strict';
+    var collisions, i,
+      // Maximum distance from the origin before we consider collision
+      distance = 32;
+    // For each ray
+    for (i = 0; i < rays.length; i += 1) {
+      // We reset the raycaster to this direction
+      raycaster.set(controls.getObject().position, rays[i]);
+      // Test if we intersect with any obstacle mesh
+      collisions = raycaster.intersectObjects(objects);
+      // And disable that direction if we do
+      if (collisions.length > 0 && collisions[0].distance <= distance) {
+        // Yep, controls.getObject().rays[i] gives us : 0 => up, 1 => up-left, 2 => left, ...
+        if ((i === 0 || i === 1 || i === 7) && velocity.z > 0) {
+          velocity.z = 0;
+        } else if ((i === 3 || i === 4 || i === 5) && velocity.z < 0) {
+          velocity.z = 0;
+        }
+        if ((i === 1 || i === 2 || i === 3) && velocity.x > 0) {
+          velocity.x = 0;
+        } else if ((i === 5 || i === 6 || i === 7) && velocity.x < 0) {
+          velocity.x = 0;
+        }
+      }
+    }
+  }
