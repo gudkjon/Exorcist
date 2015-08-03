@@ -34,3 +34,4 @@ function keyCode(keyChar) {
 
 window.addEventListener("keydown", handleKeydown);
 window.addEventListener("keyup", handleKeyup);
+//window.addEventListener("mousemove", handleMouseMove);
