@@ -27,7 +27,7 @@ Player.prototype.rays = [
     new THREE.Vector3(-1, 0, -1),
     new THREE.Vector3(-1, 0, 0),
     new THREE.Vector3(-1, 0, 1),
-    new THREE.Vector3(0, -2, 0)
+    new THREE.Vector3(0, -1, 0)
 ];
 Player.prototype.canJump = true;
 Player.prototype.velocity = new THREE.Vector3;
