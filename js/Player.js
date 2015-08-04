@@ -19,15 +19,15 @@ Player.prototype.height = 2;
 Player.prototype.caster = null;
 Player.prototype.controls = null;
 Player.prototype.rays = [
-    new THREE.Vector3(0, 0, this.radius),
-    new THREE.Vector3(this.radius, 0, this.radius),
-    new THREE.Vector3(this.radius, 0, 0),
-    new THREE.Vector3(this.radius, 0, -this.radius),
-    new THREE.Vector3(0, 0, -this.radius),
-    new THREE.Vector3(-this.radius, 0, -this.radius),
-    new THREE.Vector3(-this.radius, 0, 0),
-    new THREE.Vector3(-this.radius, 0, this.radius),
-    new THREE.Vector3(0, -this.height, 0)
+    new THREE.Vector3(0, 0, 1),
+    new THREE.Vector3(1, 0, 1),
+    new THREE.Vector3(1, 0, 0),
+    new THREE.Vector3(1, 0, -1),
+    new THREE.Vector3(0, 0, -1),
+    new THREE.Vector3(-1, 0, -1),
+    new THREE.Vector3(-1, 0, 0),
+    new THREE.Vector3(-1, 0, 1),
+    new THREE.Vector3(0, -2, 0)
 ];
 Player.prototype.canJump = true;
 Player.prototype.velocity = new THREE.Vector3;
@@ -37,7 +37,7 @@ Player.prototype.collision = function () {
       // Maximum distance from the origin before we consider collision
       distance = 32;
     // For each ray
-    for (i = 0; i < rays.length; i += 1) {
+    for (i = 0; i < this.rays.length; i += 1) {
       // We reset the this.caster to this direction
       this.caster.set(this.controls.getObject().position, this.rays[i]);
       // Test if we intersect with any obstacle mesh
