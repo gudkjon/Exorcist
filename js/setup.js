@@ -1,5 +1,6 @@
 var camera, scene, renderer, player;
 var geometry, material, mesh;
+var floorPlane;
 var controls;
 
 var objects = [];
@@ -154,8 +155,9 @@ function init() {
 
 	material = new THREE.MeshBasicMaterial( { vertexColors: THREE.VertexColors } );
 
-	mesh = new THREE.Mesh( geometry, material );
-	scene.add( mesh );
+	floorPlane = new THREE.Mesh( geometry, material );
+	//floorPlane.position.y = 100;
+	scene.add( floorPlane );
 
 
 	//
@@ -172,7 +174,10 @@ function init() {
 
 
 	geometry = new THREE.BoxGeometry( 50, 50, 50 );
-
+	var texture = THREE.ImageUtils.loadTexture('js/duke.jpg', {}, function() {
+    	renderer.render(scene);
+	});
+	material = new THREE.MeshBasicMaterial({map: texture});
 	for ( var i = 0, l = geometry.faces.length; i < l; i ++ ) {
 
 		var face = geometry.faces[ i ];
@@ -184,7 +189,7 @@ function init() {
 
 	for ( var i = 0; i < 500; i ++ ) {
 
-		material = new THREE.MeshPhongMaterial( { specular: 0xffffff, shading: THREE.FlatShading, vertexColors: THREE.VertexColors } );
+		//material = new THREE.MeshPhongMaterial( { specular: 0xffffff, shading: THREE.FlatShading, vertexColors: THREE.VertexColors } );
 
 		var mesh = new THREE.Mesh( geometry, material );
 		mesh.position.x = Math.floor( Math.random() * 200 - 100 ) * 50;

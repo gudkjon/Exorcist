@@ -38,28 +38,37 @@ Player.prototype.collision = function () {
       distance = 32;
     // For each ray
     for (i = 0; i < this.rays.length; i += 1) {
-      // We reset the this.caster to this direction
-      this.caster.set(this.controls.getObject().position, this.rays[i]);
-      // Test if we intersect with any obstacle mesh
-      collisions = this.caster.intersectObjects(objects);
-      // And disable that direction if we do
-      if (collisions.length > 0 && collisions[0].distance <= distance) {
-        // this.rays[i] gives us : 0 => up, 1 => up-left, 2 => left, ...
-        if ((i === 0 || i === 1 || i === 7) && this.velocity.z > 0) {
-          this.velocity.z = 0;
-        } else if ((i === 3 || i === 4 || i === 5) && this.velocity.z < 0) {
-          this.velocity.z = 0;
-        }
-        if ((i === 1 || i === 2 || i === 3) && this.velocity.x > 0) {
-          this.velocity.x = 0;
-        } else if ((i === 5 || i === 6 || i === 7) && this.velocity.x < 0) {
-          this.velocity.x = 0;
+        // We reset the this.caster to this direction
+        this.caster.set(this.controls.getObject().position, this.rays[i]);
+        // Test if we intersect with any obstacle mesh
+        collisions = this.caster.intersectObjects(objects);
+        // And disable that direction if we do
+        if (collisions.length > 0 && collisions[0].distance <= distance) {
+            // this.rays[i] gives us : 0 => up, 1 => up-left, 2 => left, ...
+            if ((i === 0 || i === 1 || i === 7) && this.velocity.z > 0) {
+              this.velocity.z = 0;
+            } else if ((i === 3 || i === 4 || i === 5) && this.velocity.z < 0) {
+              this.velocity.z = 0;
+            }
+            if ((i === 1 || i === 2 || i === 3) && this.velocity.x > 0) {
+              this.velocity.x = 0;
+            } else if ((i === 5 || i === 6 || i === 7) && this.velocity.x < 0) {
+              this.velocity.x = 0;
+            }
         }
         if(i == 8 && this.velocity.y < 0) {
-            this.velocity.y = 0;
-            this.canJump = true;
+            if(collisions.length > 0 && collisions[0].distance <= 100) {
+                this.velocity.y = 0;
+                this.canJump = true;
+                break;
+            }
+            var planeCollisions = this.caster.intersectObjects([floorPlane]);
+            if(planeCollisions.length > 0 && planeCollisions[0].distance <= 100) {
+                console.log("colliding plane");
+                this.velocity.y = 0;
+                this.canJump = true;
+            }
         }
-      }
     }
 };
 Player.prototype.keyUp = keyCode('W');
@@ -68,6 +77,7 @@ Player.prototype.keyLeft = keyCode('A');
 Player.prototype.keyRight = keyCode('D');
 Player.prototype.keyJump = keyCode(' ');
 Player.prototype.updatePlayer = function(delta) {
+    var tempPosition = this.controls.getObject().position;
     this.velocity.x -= this.velocity.x * 10.0 * delta;
     this.velocity.z -= this.velocity.z * 10.0 * delta;
 
