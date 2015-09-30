@@ -111,7 +111,7 @@ var prevTime = performance.now();
 
 function init() {
 
-	camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 1, 1000 );
+	camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 1, 3000 );
 
 	scene = new THREE.Scene();
 	//scene.fog = new THREE.Fog( 0xffffff, 0, 750 );
@@ -161,23 +161,24 @@ function init() {
 	
 
 	// note: 4x4 checkboard pattern scaled so that each square is 25 by 25 pixels.
+	//var floorTexture = new THREE.ImageUtils.loadTexture( '../../js/duke.jpg' );
 	var floorTexture = new THREE.ImageUtils.loadTexture( 'js/images/checkerboard.jpg' );
-	floorTexture.wrapS = floorTexture.wrapT = THREE.RepeatWrapping; 
-	floorTexture.repeat.set( 10, 10 );
+	floorTexture.wraps = floorTexture.wrapT = THREE.RepeatWrapping; 
+	//floorTexture.repeat.set( 100, 100 );
 	// DoubleSide: render texture on both sides of mesh
 	var floorMaterial = new THREE.MeshBasicMaterial( { map: floorTexture, side: THREE.DoubleSide } );
-	var floorGeometry = new THREE.PlaneGeometry(300, 300, 1, 1);
+	var floorGeometry = new THREE.PlaneGeometry(500, 500, 100, 100);
 	var floor = new THREE.Mesh(floorGeometry, floorMaterial);
 	floor.position.y = -0.5;
 	floor.rotation.x = Math.PI / 2;
 	scene.add(floor);
 	//
-
-//	var skyGeometry = new THREE.SphereGeometry(3000, 60, 40);  
-//	var skyMaterial = new THREE.ImageUtils.loadTexture('js/images/sky.jpg');
 /*
+	var skyGeometry = new THREE.SphereGeometry(3000, 60, 40);  
+	var skyMaterial = new THREE.ImageUtils.loadTexture('js/images/checkerboard.jpg');
+
 	var uniforms = {  
-  		texture: { type: 't', value: THREE.ImageUtils.loadTexture('js/images/sky.jpg') }
+  		texture: { type: 't', value: THREE.ImageUtils.loadTexture('js/images/checkerboard.jpg') }
 	};
 
 	var skyMaterial = new THREE.ShaderMaterial( {  
@@ -185,14 +186,46 @@ function init() {
 		  vertexShader:   document.getElementById('sky-vertex').textContent,
 		  fragmentShader: document.getElementById('sky-fragment').textContent
 	});
-
+	
 	var skyBox = new THREE.Mesh(skyGeometry, skyMaterial);  
 	skyBox.scale.set(-1, 1, 1);  
-	skyBox.eulerOrder = 'XZY';  
+	//skyBox.eulerOrder = 'XZY';  
 	skyBox.renderDepth = 1000.0;  
 	scene.add(skyBox); 
+	*/
+	var urls = [
+	  'js/images/bluesky_left.jpg', //left
+	  'js/images/bluesky_right.jpg',  //right
+	  'js/images/bluesky_top.jpg', //top
+	  'js/images/bluesky_top.jpg', //bottom
+	  'js/images/bluesky_back.jpg', //back
+	  'js/images/bluesky_front.jpg'  //front
+	];
 
+	var cubemap = THREE.ImageUtils.loadTextureCube(urls); // load textures
+	cubemap.format = THREE.RGBFormat;
 
+	var shader = THREE.ShaderLib['cube']; // init cube shader from built-in lib
+	shader.uniforms['tCube'].value = cubemap; // apply textures to shader
+
+	// create shader material
+	var skyBoxMaterial = new THREE.ShaderMaterial( {
+	  fragmentShader: shader.fragmentShader,
+	  vertexShader: shader.vertexShader,
+	  uniforms: shader.uniforms,
+	  depthWrite: false,
+	  side: THREE.BackSide
+	});
+
+	// create skybox mesh
+	var skybox = new THREE.Mesh(
+	  new THREE.CubeGeometry(2000, 2000, 2000),
+	  skyBoxMaterial
+	);
+
+	scene.add(skybox);
+
+/*
 	var imagePrefix = "js/images/bluesky_";
 	var directions  = ["back", "front", "left", "right", "back"];
 	var imageSuffix = ".jpg";

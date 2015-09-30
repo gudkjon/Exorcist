@@ -174,22 +174,22 @@ function init() {
 
 
 	geometry = new THREE.BoxGeometry( 50, 50, 50 );
-	/*var texture = THREE.ImageUtils.loadTexture('js/duke.jpg', {}, function() {
+	var texture = THREE.ImageUtils.loadTexture('js/duke.jpg', {}, function() {
     	renderer.render(scene);
 	});
-	material = new THREE.MeshBasicMaterial({map: texture});*/
+	material = new THREE.MeshBasicMaterial({map: texture});
 	for ( var i = 0, l = geometry.faces.length; i < l; i ++ ) {
-
+/*
 		var face = geometry.faces[ i ];
 		face.vertexColors[ 0 ] = new THREE.Color().setHSL( Math.random() * 0.3 + 0.5, 0.75, Math.random() * 0.25 + 0.75 );
 		face.vertexColors[ 1 ] = new THREE.Color().setHSL( Math.random() * 0.3 + 0.5, 0.75, Math.random() * 0.25 + 0.75 );
-		face.vertexColors[ 2 ] = new THREE.Color().setHSL( Math.random() * 0.3 + 0.5, 0.75, Math.random() * 0.25 + 0.75 );
+		face.vertexColors[ 2 ] = new THREE.Color().setHSL( Math.random() * 0.3 + 0.5, 0.75, Math.random() * 0.25 + 0.75 );*/
 
 	}
 
 	for ( var i = 0; i < 500; i ++ ) {
 
-		material = new THREE.MeshPhongMaterial( { specular: 0xffffff, shading: THREE.FlatShading, vertexColors: THREE.VertexColors } );
+		//material = new THREE.MeshPhongMaterial( { specular: 0xffffff, shading: THREE.FlatShading, vertexColors: THREE.VertexColors } );
 
 		var mesh = new THREE.Mesh( geometry, material );
 		mesh.position.x = Math.floor( Math.random() * 200 - 100 ) * 50;
@@ -201,14 +201,14 @@ function init() {
 
 		objects.push( mesh );
 
-
+/*
 		var test = new THREE.BoxGeometry( 50, 50, 10);
 		var materialTest = new THREE.MeshBasicMaterial( { color: 0x000088 } );
 		var testMesh = new THREE.Mesh( test, materialTest);
 		testMesh.position.x = testMesh.position.x +30;
 		testMesh.position.z = testMesh.position.z +30;
 		scene.add( testMesh)
-		objects.push( testMesh );
+		objects.push( testMesh );*/
 
 	}
 
