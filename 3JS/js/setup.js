@@ -6,6 +6,7 @@ var controls;
 var objects = [];
 
 var raycaster;
+var build1;
 
 var blocker = document.getElementById( 'blocker' );
 var instructions = document.getElementById( 'instructions' );
@@ -97,8 +98,6 @@ if ( havePointerLock ) {
 	instructions.innerHTML = 'Your browser doesn\'t seem to support Pointer Lock API';
 
 }
-init();
-
 
 var controlsEnabled = false;
 
@@ -108,6 +107,9 @@ var moveLeft = false;
 var moveRight = false;
 
 var prevTime = performance.now();
+
+//Initilize  scene
+init();
 
 function init() {
 
@@ -220,6 +222,8 @@ function init() {
 	objects.push( testMesh2 );
 
 
+	build1 = new building();
+	console.log(build1);
 }
 
 function onWindowResize() {
