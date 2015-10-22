@@ -7,7 +7,7 @@ function NPC(descr) {
 */
 this.setup(descr);
 
-};
+}
 NPC.prototype.setup = function (descr) {
     // Apply all setup properies from the (optional) descriptor
     for (var property in descr) {
@@ -30,7 +30,7 @@ NPC.prototype.rays = [
     new THREE.Vector3(0, -1, 0)
 ];
 NPC.prototype.canJump = true;
-NPC.prototype.velocity = new THREE.Vector3;
+NPC.prototype.velocity = new THREE.Vector3();
 NPC.prototype.collision = function () {
     //'use strict';
     var collisions, i,

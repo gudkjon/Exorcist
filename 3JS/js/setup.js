@@ -203,6 +203,7 @@ function init() {
 	var axes = new THREE.AxisHelper(200);
 	scene.add( axes );
 
+/*
 	var test = new THREE.BoxGeometry( 50, 50, 10);
 	var materialTest = new THREE.MeshBasicMaterial( { color: 0xffff00 } );
 	var testMesh = new THREE.Mesh( test, materialTest);
@@ -220,10 +221,11 @@ function init() {
 	testMesh2.position.x = testMesh2.position.x +50;
 	scene.add( testMesh2 )
 	objects.push( testMesh2 );
-
+*/
 
 	build1 = new building();
-	console.log(build1);
+	
+	console.log( build1 );
 }
 
 function onWindowResize() {

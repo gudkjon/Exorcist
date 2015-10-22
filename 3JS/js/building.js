@@ -9,6 +9,7 @@ building.prototype.setup = function (descr) {
     }
 };
 
+var w = new wall();
 building.prototype.location = ["X", "Y", "Z"];
 building.prototype.walls = ["true", "true", "true", "true", "true"];
 building.prototype.doors = ["true"];
