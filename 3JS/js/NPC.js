@@ -1,5 +1,4 @@
 function NPC(descr) {
-
 /*
     // Diagnostics to check inheritance stuff
     this._NPCProperty = true;
@@ -17,7 +16,7 @@ NPC.prototype.setup = function (descr) {
 NPC.prototype.radius = 1;
 NPC.prototype.height = 2;
 NPC.prototype.caster = null;
-NPC.prototype.controls = null;
+NPC.prototype.mesh = null;
 NPC.prototype.rays = [
     new THREE.Vector3(0, 0, 1),
     new THREE.Vector3(1, 0, 1),
@@ -39,7 +38,7 @@ NPC.prototype.collision = function () {
     // For each ray
     for (i = 0; i < this.rays.length; i += 1) {
         // We reset the this.caster to this direction
-        this.caster.set(this.controls.getObject().position, this.rays[i]);
+        this.caster.set(this.mesh.position, this.rays[i]);
         // Test if we intersect with any obstacle mesh
         collisions = this.caster.intersectObjects(objects);
         // And disable that direction if we do
@@ -62,32 +61,32 @@ NPC.prototype.collision = function () {
                 this.canJump = true;
                 break;
             }
-            var planeCollisions = this.caster.intersectObjects([floorPlane]);
-            if(planeCollisions.length > 0 && planeCollisions[0].distance <= 100) {
-                console.log("colliding plane");
-                this.velocity.y = 0;
-                this.canJump = true;
-            }
         }
     }
 };
+NPC.prototype.randomizeMovement = function(delta) {
+    this.velocity.x = (Math.random() * 20-10)*delta;
+    this.velocity.y = (Math.random() * 4 - 6)*delta;
+    this.velocity.z = (Math.random() * 20-10)*delta;
+};
 NPC.prototype.updateNPC = function(delta) {
-    var tempPosition = this.controls.getObject().position;
-    this.velocity.x -= this.velocity.x * 10.0 * delta;
-    this.velocity.z -= this.velocity.z * 10.0 * delta;
+    var tempmesh = this.mesh;
+    this.velocity.x -= this.velocity.x * 10.0;
+    this.velocity.z -= this.velocity.z * 10.0;
 
-    this.velocity.y -= 9.8 * 100.0 * delta; // 100.0 = mass
+    this.velocity.y -= 9.8 * 100.0; // 100.0 = mass
+    this.randomizeMovement(delta);
 
-    this.collision();
+    //this.collision();
 
-    this.controls.getObject().translateX( this.velocity.x * delta );
-    this.controls.getObject().translateY( this.velocity.y * delta );
-    this.controls.getObject().translateZ( this.velocity.z * delta );
+    this.mesh.translateX( this.velocity.x );
+    this.mesh.translateY( this.velocity.y );
+    this.mesh.translateZ( this.velocity.z );
 
-    if ( this.controls.getObject().position.y < 10 ) {
+    if ( this.mesh.position.y < 10 ) {
 
         this.velocity.y = 0;
-        this.controls.getObject().position.y = 10;
+        this.mesh.position.y = 10;
 
         this.canJump = true;
 

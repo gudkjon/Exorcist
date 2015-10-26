@@ -1,9 +1,9 @@
-var camera, scene, renderer;
+var camera, renderer;
 var geometry, material, mesh;
 //var floorPlane;
 var controls;
-
-var objects = [];
+/*scene,*/
+//var objects = [];
 
 var raycaster;
 var build1;
@@ -115,7 +115,7 @@ function init() {
 
 	camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 1, 3000 );
 
-	scene = new THREE.Scene();
+	//scene = new THREE.Scene();
 	//scene.fog = new THREE.Fog( 0xffffff, 0, 750 );
 
 	var light = new THREE.HemisphereLight( 0xeeeeff, 0x777788, 0.75 );
@@ -138,11 +138,15 @@ function init() {
 
 	// note: 4x4 checkboard pattern scaled so that each square is 25 by 25 pixels.
 	//var floorTexture = new THREE.ImageUtils.loadTexture( '../../js/duke.jpg' );
-	var floorTexture = new THREE.ImageUtils.loadTexture( 'js/images/checkerboard.jpg' );
-	floorTexture.wraps = floorTexture.wrapT = THREE.RepeatWrapping; 
+
+	//closed for debugging
+	//var floorTexture = new THREE.ImageUtils.loadTexture( 'js/images/checkerboard.jpg' );
+	//floorTexture.wraps = floorTexture.wrapT = THREE.RepeatWrapping; 
 	//floorTexture.repeat.set( 100, 100 );
 	// DoubleSide: render texture on both sides of mesh
-	var floorMaterial = new THREE.MeshBasicMaterial( { map: floorTexture, side: THREE.DoubleSide } );
+	//var floorMaterial = new THREE.MeshBasicMaterial( { map: floorTexture, side: THREE.DoubleSide } );
+	
+	var floorMaterial = new THREE.MeshBasicMaterial( { color: 0xff0000 } );
 	var floorGeometry = new THREE.PlaneGeometry(500, 500, 100, 100);
 	var floor = new THREE.Mesh(floorGeometry, floorMaterial);
 	floor.position.y = -0.5;
