@@ -77,10 +77,10 @@ NPC.prototype.updateNPC = function(delta) {
     this.mesh.translateY( this.velocity.y * delta );
     this.mesh.translateZ( this.velocity.z * delta );
 
-    if ( this.mesh.y < 10 ) {
+    if ( this.mesh.position.y < 10 ) {
 
         this.velocity.y = 0;
-        this.mesh.y = 10;
+        this.mesh.position.y = 10;
 
         this.canJump = true;
 
