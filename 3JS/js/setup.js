@@ -186,7 +186,8 @@ function init() {
 	scene.add(skybox);
 
 
-	geometry = new THREE.BoxGeometry( 50, 50, 50 );
+
+	geometry = new THREE.SphereGeometry(20, 32, 32);
 	for ( var i = 0, l = geometry.faces.length; i < l; i ++ ) {
 		var face = geometry.faces[ i ];
 		face.vertexColors[ 0 ] = new THREE.Color().setHSL( Math.random() * 0.3 + 0.5, 0.75, Math.random() * 0.25 + 0.75 );

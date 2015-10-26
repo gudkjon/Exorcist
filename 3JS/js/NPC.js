@@ -71,8 +71,6 @@ NPC.prototype.randomizeMovement = function(delta) {
 };
 NPC.prototype.updateNPC = function(delta) {
     var tempmesh = this.mesh;
-    this.velocity.x -= this.velocity.x * 10.0;
-    this.velocity.z -= this.velocity.z * 10.0;
 
     this.velocity.y -= 9.8 * 100.0; // 100.0 = mass
     this.randomizeMovement(delta);

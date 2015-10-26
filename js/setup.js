@@ -173,7 +173,7 @@ function init() {
 	window.addEventListener( 'resize', onWindowResize, false );
 
 
-	geometry = new THREE.BoxGeometry( 50, 50, 50 );
+	geometry = new THREE.SphereGeometry(0.5, 32, 32);
 	var texture = THREE.ImageUtils.loadTexture('js/duke.jpg', {}, function() {
     	renderer.render(scene);
 	});
