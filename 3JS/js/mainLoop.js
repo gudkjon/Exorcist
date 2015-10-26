@@ -4,13 +4,14 @@ function iterGame() {
 	update();
 	render();
 }
+//var prevTime = performance.now();
 function update() {
-	if ( controlsEnabled ) {
+	//if ( controlsEnabled ) {
 		var time = performance.now();
 		var delta = ( time - prevTime ) / 1000;
-		//player.updatePlayer(delta);
+		npc.updateNPC(delta);
 		prevTime = time;
-	}
+	//}
 }
 function render() {
 	renderer.render( scene, camera );

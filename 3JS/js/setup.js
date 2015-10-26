@@ -2,8 +2,9 @@ var camera, scene, renderer;
 var geometry, material, mesh;
 //var floorPlane;
 var controls;
-
+var npc;
 var objects = [];
+var prevTime = performance.now();
 
 var raycaster;
 var build1;
@@ -184,6 +185,29 @@ function init() {
 
 	scene.add(skybox);
 
+
+	geometry = new THREE.BoxGeometry( 500, 500, 500 );
+	for ( var i = 0, l = geometry.faces.length; i < l; i ++ ) {
+		var face = geometry.faces[ i ];
+		face.vertexColors[ 0 ] = new THREE.Color().setHSL( Math.random() * 0.3 + 0.5, 0.75, Math.random() * 0.25 + 0.75 );
+		face.vertexColors[ 1 ] = new THREE.Color().setHSL( Math.random() * 0.3 + 0.5, 0.75, Math.random() * 0.25 + 0.75 );
+		face.vertexColors[ 2 ] = new THREE.Color().setHSL( Math.random() * 0.3 + 0.5, 0.75, Math.random() * 0.25 + 0.75 );
+
+	}
+	material = new THREE.MeshPhongMaterial( { specular: 0xffffff, shading: THREE.FlatShading, vertexColors: THREE.VertexColors } );
+
+	var mesh = new THREE.Mesh( geometry, material );
+
+	scene.add( mesh );
+
+	material.color.setHSL( Math.random() * 0.2 + 0.5, 0.75, Math.random() * 0.25 + 0.75 );
+
+	raycaster = new THREE.Raycaster( new THREE.Vector3(), new THREE.Vector3( 0, - 1, 0 ), 0, 10 );
+	
+	npc = new NPC({
+		mesh : mesh,
+		caster : raycaster
+	});
 
 
 
