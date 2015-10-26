@@ -64,18 +64,24 @@ NPC.prototype.collision = function () {
         }
     }
 };
+NPC.prototype.randomizeMovement = function(delta) {
+    this.velocity.x = (Math.random() * 20-10)*delta;
+    this.velocity.y = (Math.random() * 4 - 6)*delta;
+    this.velocity.z = (Math.random() * 20-10)*delta;
+};
 NPC.prototype.updateNPC = function(delta) {
     var tempmesh = this.mesh;
-    this.velocity.x -= this.velocity.x * 10.0 * delta;
-    this.velocity.z -= this.velocity.z * 10.0 * delta;
+    this.velocity.x -= this.velocity.x * 10.0;
+    this.velocity.z -= this.velocity.z * 10.0;
 
-    this.velocity.y -= 9.8 * 100.0 * delta; // 100.0 = mass
+    this.velocity.y -= 9.8 * 100.0; // 100.0 = mass
+    this.randomizeMovement(delta);
 
-    this.collision();
+    //this.collision();
 
-    this.mesh.translateX( this.velocity.x * delta );
-    this.mesh.translateY( this.velocity.y * delta );
-    this.mesh.translateZ( this.velocity.z * delta );
+    this.mesh.translateX( this.velocity.x );
+    this.mesh.translateY( this.velocity.y );
+    this.mesh.translateZ( this.velocity.z );
 
     if ( this.mesh.position.y < 10 ) {
 
