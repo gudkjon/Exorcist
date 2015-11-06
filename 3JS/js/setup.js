@@ -138,15 +138,14 @@ function init() {
 
 	// note: 4x4 checkboard pattern scaled so that each square is 25 by 25 pixels.
 	//var floorTexture = new THREE.ImageUtils.loadTexture( '../../js/duke.jpg' );
-
-	//closed for debugging
-	//var floorTexture = new THREE.ImageUtils.loadTexture( 'js/images/checkerboard.jpg' );
-	//floorTexture.wraps = floorTexture.wrapT = THREE.RepeatWrapping; 
-	//floorTexture.repeat.set( 100, 100 );
-	// DoubleSide: render texture on both sides of mesh
-	//var floorMaterial = new THREE.MeshBasicMaterial( { map: floorTexture, side: THREE.DoubleSide } );
 	
-	var floorMaterial = new THREE.MeshBasicMaterial( { color: 0xff0000 } );
+	//floorTexture.repeat.set( 100, 100 );
+	//DoubleSide: render texture on both sides of mesh
+	var floorTexture = new THREE.ImageUtils.loadTexture( 'js/images/checkerboard.jpg' );
+	floorTexture.wraps = floorTexture.wrapT = THREE.RepeatWrapping; 
+	var floorMaterial = new THREE.MeshBasicMaterial( { map: floorTexture, side: THREE.DoubleSide } );
+	
+	//var floorMaterial = new THREE.MeshBasicMaterial( { color: 0xff0000 } );
 	var floorGeometry = new THREE.PlaneGeometry(500, 500, 100, 100);
 	var floor = new THREE.Mesh(floorGeometry, floorMaterial);
 	floor.position.y = -0.5;
@@ -189,7 +188,7 @@ function init() {
 	scene.add(skybox);
 
 
-
+ 	 
 	geometry = new THREE.SphereGeometry(20, 32, 32);
 	for ( var i = 0, l = geometry.faces.length; i < l; i ++ ) {
 		var face = geometry.faces[ i ];

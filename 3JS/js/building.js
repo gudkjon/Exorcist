@@ -9,9 +9,8 @@ building.prototype.setup = function (descr) {
     }
 };
 
-var w = new wall();
-building.prototype.location = ["X", "Y", "Z"];
-building.prototype.walls = ["true", "true", "true", "true", "true"];
+
+building.prototype.location = [0, 0, 0];
 building.prototype.doors = ["true"];
 building.prototype.npcsInside = ["true"];
 building.prototype.playersInside = ["true"];
@@ -20,4 +19,12 @@ building.prototype.updateBuilding = function(delta){
 	return true;
 };
 
+building.prototype.walls = new walls(
+	{
+		xv:50,
+		yv: 50,
+		zv: 10,
+		loca: this.location
+	}
+);
 
