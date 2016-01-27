@@ -34,12 +34,13 @@ main {
 h1 {
 	/*height: 15rem;
 	padding: 5rem;*/
-	margin-top: 10%;
+	/*margin-top: 2.5%;*/
+	margin-bottom: 2.5%;
 	margin-left: 25%;
 	margin-right: 25%;
 	/*position:absolute;*/
-	background-color: #fff;
-	opacity: 0.9;
+	background-color: #ffffff;
+	/*opacity: 0.9;*/
 	/*padding: 2rem;*/
 	text-align: center;
 	font-size: 4em;
