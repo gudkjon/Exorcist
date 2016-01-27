@@ -30,3 +30,18 @@ main {
 .theme-showcase .navbar .container {
   width: auto;
 }
+
+h1.headline{
+	/*height: 15rem;
+	padding: 5rem;*/
+	margin-top: 10%;
+	margin-left: 25%;
+	margin-right: 25%;
+	/*position:absolute;*/
+	background-color: #fff;
+	opacity: 0.9;
+	/*padding: 2rem;*/
+	text-align: center;
+	font-size: 4em;
+	/*font-family: 'Niconne';*/
+}
